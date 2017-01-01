@@ -48,9 +48,31 @@ response = requests.delete(...)
 import pandas as pd
 dataframe = pd.read_csv("CourseRoster_F16_15688_B_08.30.2016.csv", delimiter=',', quotechar='"')
 ```
-### 2. JSON files and string
-(Javascript object notation)
-### 3. HTML/XML files and string
-(hypertext markup language / extensible markup
-language) 
 
+### 2. JSON files and string: json
+(Javascript object notation) that looks like this:
+{
+  "message": "Not Found",
+  "documentation_url": "https://developer.github.com/v3"
+}
+
+```python
+import json
+# load json from a REST API call
+response = requests.get("https://api.github.com/user", params={"access_token":token})
+data = json.loads(response.content)
+json.load(file) # load json from file
+json.dumps(obj) # return json string
+json.dump(obj, file) # write json to file
+```
+
+### 3. HTML/XML files and string: BeautifulSoup
+(hypertext markup language / extensible markup language) that contains hiearchical content delineated by tags
+```python
+# get all the links within the data science course schedule
+from bs4 import BeautifulSoup
+import requests
+response = requests.get("http://www.datasciencecourse.org")
+root = BeautifulSoup(response.content)
+root.find("section",id="schedule").find("table").find("tbody").findAll("a")
+```
