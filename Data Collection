@@ -1,0 +1,18 @@
+# Data Collection
+#### Lecture Notes 1
+---------------------------------------------------------------
+* File: Download
+* Database: Query
+* API: Query
+* Webpage: Scrap/Parse -> usually HTTP request
+
+```python
+import requests
+response = requests.get("http://www.datasciencecourse.org")
+# some relevant fields
+response.status_code
+response.content # or response.text
+response.headers
+response.headers['Content-Type']
+```
+
